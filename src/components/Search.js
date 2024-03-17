@@ -253,7 +253,7 @@ function List({
 				</div>
 				<div>
 					<span className="f7 black-50 bg-near-white ph1 pv05 br1">
-						{device.type.name}
+						{device.type}
 					</span>
 				</div>
 			</li>

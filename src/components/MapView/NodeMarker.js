@@ -48,7 +48,7 @@ function getIcon(node) {
 		};
 
 	// Omni
-	if (devices.filter(device => device.type.name === "Omni").length)
+	if (devices.filter(device => device.name && device.name.indexOf("omni") !== -1).length)
 		return {
 			url: "/img/map/omni.svg",
 			anchor: { x: 6, y: 6 }
@@ -65,6 +65,6 @@ function getZ(node) {
 
 	if (name && name.includes("Supernode")) return 4;
 	if (notes && notes.includes("hub")) return 3;
-	if (devices.filter(device => device.type.name === "Omni").length) return 2;
+	if (devices.filter(device => device.name && device.name.indexOf("omni") !== -1).length) return 2;
 	return 1;
 }

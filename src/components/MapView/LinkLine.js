@@ -10,15 +10,15 @@ export default function LinkLine(props) {
 	const strokeColor = getColor(
 		nodes[0],
 		nodes[1],
-		devices[0].type,
-		devices[1].type,
+		devices[0],
+		devices[1],
 		link
 	);
 	const strokeOpacity = getOpacity(
 		nodes[0],
 		nodes[1],
-		devices[0].type,
-		devices[1].type,
+		devices[0],
+		devices[1],
 		link
 	);
 	const strokeWeight = getWeight(
@@ -44,26 +44,26 @@ export default function LinkLine(props) {
 }
 
 const isSupernode = node => node.name && node.name.includes("Supernode");
-const isHub = node => node.notes && node.notes.includes("hub");
-const isOmni = device_type => device_type.name === "Omni";
-const isBackbone = (node, device_type) =>
-	isSupernode(node) || isHub(node) || isOmni(device_type);
+const isHub = node => node.notes && node.notes.includes("Hub");
+const isOmni = device => device.name && device.name.indexOf("omni") !== -1;
+const isBackbone = (node, device) =>
+	isSupernode(node) || isHub(node) || isOmni(device);
 
-function getColor(node1, node2, device_type1, device_type2, link) {
+function getColor(node1, node2, device1, device2, link) {
 	if (link.status === "los") return "#f0f";
-	if (isBackbone(node1, device_type1) && isBackbone(node2, device_type2))
+	if (isBackbone(node1, device1) && isBackbone(node2, device2))
 		return "rgb(0,122,255)";
 	return "rgb(255,45,85)";
 }
 
-function getOpacity(node1, node2, device_type1, device_type2, link) {
+function getOpacity(node1, node2, device1, device2, link) {
 	if (link.status === "los") return 1;
 	if (
 		(isHub(node1) || isSupernode(node1)) &&
 		(isHub(node2) || isSupernode(node2))
 	)
 		return 1;
-	if (isBackbone(node1, device_type1) && isBackbone(node2, device_type2))
+	if (isBackbone(node1, device1) && isBackbone(node2, device2))
 		return 0.75;
 	return 0.5;
 }
