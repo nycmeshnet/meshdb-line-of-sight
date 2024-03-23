@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  los:
+    container_name: los
+    build: .
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    networks:
+      - los
+    expose:
+      - 3000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.port=80"
+        # .nycmesh.net URL (with HTTPS)
+      - "traefik.http.routers.los.rule=Host(`los.grandsvc.mesh.nycmesh.net`)"
+      - "traefik.http.routers.los.entrypoints=websecure"
+      - "traefik.http.routers.los.tls=true"
+      - "traefik.http.routers.los.tls.certresolver=grandsvcresolver"
+        # .nycmesh.net Redirect insecure traffic
+      - "traefik.http.routers.los-insecure.rule=Host(`los.grandsvc.mesh.nycmesh.net`)"
+      - "traefik.http.routers.los-insecure.entrypoints=web"
+      - "traefik.http.middlewares.los-https.redirectscheme.scheme=https"
+      - "traefik.http.routers.los-insecure.middlewares=los-https@docker"
+        # .mesh URL
+      - "traefik.http.routers.los-mesh.rule=Host(`los.grandsvc.mesh`)"
+      - "traefik.http.routers.los-mesh.entrypoints=web"
+
+networks:
+  los:
+    external: true
+    name: traefik-net
