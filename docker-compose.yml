@@ -2,6 +2,7 @@ version: '3.8'
 services:
   los:
     container_name: los
+    image: willnilges/meshdb-line-of-sight:meshdb
     build: .
     environment:
       - NODE_ENV=production
