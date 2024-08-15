@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "los.fullname" . }}
+  namespace: {{ .Values.los_namespace }}
+  labels:
+    {{- include "los.labels" . | nindent 4 }}
+spec:
+  rules:
+    - host: {{ .Values.los.fqdn }}
+      http:
+        paths:
+          - path: "/"
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: {{ include "los.fullname" . }}
+                port:
+                  number: {{ .Values.los.port }}

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "los.fullname" . }}
+  namespace: {{ .Values.los_namespace }}
+  labels:
+    {{- include "los.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.los.port }}
+      targetPort: {{ .Values.los.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app: los

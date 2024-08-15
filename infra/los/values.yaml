@@ -1,0 +1,33 @@
+replicaCount: 1
+
+los_namespace: "los"
+
+los:
+  image:
+    repository: willnilges/meshdb-line-of-sight
+    tag: helm
+    pullPolicy: Always
+  port: 3000
+
+nameOverride: ""
+fullnameOverride: ""
+
+podAnnotations: {}
+podLabels: {}
+
+resources: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
