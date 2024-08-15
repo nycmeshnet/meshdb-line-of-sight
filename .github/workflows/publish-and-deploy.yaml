@@ -6,6 +6,8 @@ on:
       - meshdb
       - james/helm
 
+permissions: read-all
+
 jobs:
   push_to_registry:
     name: Push Docker Image to Docker Hub
