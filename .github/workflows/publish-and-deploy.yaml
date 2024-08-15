@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - meshdb
-      - james/helm
 
 permissions: read-all
 
@@ -40,16 +39,18 @@ jobs:
 
   deploy_to_dev3:
     name: Deploy to dev 3
+    needs: push_to_registry
     uses: ./.github/workflows/helm-deploy.yaml
     with:
       environment: dev3
     secrets: inherit
-    #if: github.ref == 'refs/heads/meshdb'
+    if: github.ref == 'refs/heads/meshdb'
 
   deploy_to_prod1:
     name: Deploy to prod 1
+    needs: deploy_to_dev3
     uses: ./.github/workflows/helm-deploy.yaml
     with:
       environment: prod1
     secrets: inherit
-    #if: github.ref == 'refs/heads/meshdb'
+    if: github.ref == 'refs/heads/meshdb'
