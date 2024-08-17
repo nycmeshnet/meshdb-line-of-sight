@@ -50,4 +50,5 @@ jobs:
             --set backend.los_database_url="${{ secrets.BACKEND_LOS_DATABASE_URL }}" \
             --set backend.database_user="${{ secrets.BACKEND_DATABASE_USER }}" \
             --set backend.database_password="${{ secrets.BACKEND_DATABASE_PASSWORD }}" \
+            --set los_backend.fqdn="${{ vars.BACKEND_FQDN }}" \
             --set los.fqdn="${{ vars.FQDN }}"
