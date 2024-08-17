@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - meshdb
+      - james/helm
 
 permissions: read-all
 
@@ -44,7 +45,7 @@ jobs:
     with:
       environment: dev3
     secrets: inherit
-    if: github.ref == 'refs/heads/meshdb'
+    #if: github.ref == 'refs/heads/meshdb'
 
   deploy_to_prod1:
     name: Deploy to prod 1
@@ -53,4 +54,4 @@ jobs:
     with:
       environment: prod1
     secrets: inherit
-    if: github.ref == 'refs/heads/meshdb'
+    #if: github.ref == 'refs/heads/meshdb'
