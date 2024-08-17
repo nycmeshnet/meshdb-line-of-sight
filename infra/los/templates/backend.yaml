@@ -39,7 +39,7 @@ spec:
                   key: los-database-url
           ports:
             - name: http
-              containerPort: {{ .Values.backend.port }}
+              containerPort: {{ .Values.los_backend.port }}
               protocol: TCP
           livenessProbe:
             {{- toYaml .Values.livenessProbe | nindent 12 }}
