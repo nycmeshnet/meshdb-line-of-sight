@@ -9,6 +9,23 @@ los:
     pullPolicy: Always
   port: 3000
 
+los_backend:
+  image:
+    repository: andrewdickinson/meshdb-los-tool
+    tag: latest
+    pullPolicy: Always
+  port: 3000
+
+los_database:
+  image:
+    repository: postgis/postgis
+    tag: latest
+    pullPolicy: Always
+  port: 5432
+  db_name: los
+  pvc_name: "los-postgis-pvc"
+  pvc_size: "10Gi"
+
 nameOverride: ""
 fullnameOverride: ""
 

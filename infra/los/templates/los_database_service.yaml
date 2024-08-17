@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "los.fullname" . }}-database-service
+  namespace: {{ .Values.los_namespace }}
+  labels:
+    {{- include "los.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.los_database.port }}
+      targetPort: {{ .Values.los_database.port }}
+      protocol: TCP
+      name: db
+  selector:
+    app: los-database
