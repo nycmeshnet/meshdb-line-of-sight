@@ -24,7 +24,7 @@ los_database:
   port: 5432
   db_name: los
   pvc_name: "los-postgis-pvc"
-  pvc_size: "10Gi"
+  pvc_size: "3Gi"
 
 nameOverride: ""
 fullnameOverride: ""
