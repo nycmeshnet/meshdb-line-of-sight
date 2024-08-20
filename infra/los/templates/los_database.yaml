@@ -26,21 +26,11 @@ spec:
         - name: {{ .Chart.Name }}-los-database
           image: "{{ .Values.los_database.image.repository }}:{{ .Values.los_database.image.tag }}"
           imagePullPolicy: {{ .Values.los_database.image.pullPolicy }}
-          env:
-            - name: POSTGRES_HOST_AUTH_METHOD
-              value: trust
-            - name: POSTGRES_DB
-              value: {{ .Values.los_database.db_name }}
-            - name: POSTGRES_USER
-              valueFrom:
-                secretKeyRef:
-                  name: backend-secrets
-                  key: database-user
-            - name: POSTGRES_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: backend-secrets
-                  key: database-password
+          envFrom:
+            - secretRef:
+                name: los-secrets
+            - configMapRef:
+                name: los-config
           volumeMounts:
             - name: pg-data-vol
               mountPath: /var/lib/postgresql/data
