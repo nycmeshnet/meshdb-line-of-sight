@@ -52,3 +52,6 @@ jobs:
             --set backend.database_password="${{ secrets.BACKEND_DATABASE_PASSWORD }}" \
             --set los_backend.fqdn="${{ vars.BACKEND_FQDN }}" \
             --set los.fqdn="${{ vars.FQDN }}"
+          
+          # Rolling restart
+          kubectl --kubeconfig ./config --server https://${{ secrets.SSH_TARGET_IP }}:6443 -n ${{ vars.APP_NAMESPACE }} rollout restart deploy
