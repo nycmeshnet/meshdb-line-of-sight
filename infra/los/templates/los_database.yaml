@@ -40,20 +40,20 @@ spec:
               containerPort: {{ .Values.los_database.port }}
               protocol: TCP
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+            {{- toYaml .Values.los_database.resources | nindent 12 }}
       volumes:
         - name: pg-data-vol
           persistentVolumeClaim:
             claimName: {{ .Values.los_database.pvc_name }}
-      {{- with .Values.nodeSelector }}
+      {{- with .Values.los_database.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.affinity }}
+      {{- with .Values.los_database.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- with .Values.los_database.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

@@ -1,5 +1,3 @@
-replicaCount: 1
-
 los_namespace: "los"
 
 los:
@@ -8,6 +6,24 @@ los:
     tag: helm
     pullPolicy: Always
   port: 3000
+  resources:
+    limits:
+      cpu: 512m
+      memory: 512Mi
+    requests:
+      cpu: 64m
+      memory: 128Mi
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 los_backend:
   image:
@@ -15,6 +31,24 @@ los_backend:
     tag: latest
     pullPolicy: Always
   port: 3000
+  resources:
+    limits:
+      cpu: 512m
+      memory: 512Mi
+    requests:
+      cpu: 64m
+      memory: 128Mi
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 los_database:
   image:
@@ -25,26 +59,19 @@ los_database:
   db_name: los
   pvc_name: "los-postgis-pvc"
   pvc_size: "3Gi"
+  resources:
+    limits:
+      cpu: 512m
+      memory: 512Mi
+    requests:
+      cpu: 64m
+      memory: 256Mi
+  nodeSelector: {}
+  affinity: {}
+  tolerations: []
 
 nameOverride: ""
 fullnameOverride: ""
 
 podAnnotations: {}
 podLabels: {}
-
-resources: {}
-
-livenessProbe:
-  httpGet:
-    path: /
-    port: http
-readinessProbe:
-  httpGet:
-    path: /
-    port: http
-
-nodeSelector: {}
-
-tolerations: []
-
-affinity: {}
