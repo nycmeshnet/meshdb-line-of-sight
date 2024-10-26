@@ -53,7 +53,7 @@ los_backend:
 los_database:
   image:
     repository: postgis/postgis
-    tag: latest
+    tag: 16-master
     pullPolicy: Always
   port: 5432
   db_name: los
