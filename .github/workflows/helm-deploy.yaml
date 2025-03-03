@@ -46,6 +46,9 @@ jobs:
             -n ${{ vars.APP_NAMESPACE }} \
             --create-namespace \
             -f ./infra/los/values.yaml \
+            --set imageCredentials.username="${{ secrets.PULL_SECRET_USERNAME }}" \
+            --set imageCredentials.password="${{ secrets.PULL_SECRET_PASSWORD }}" \
+            --set imageCredentials.email="${{ secrets.PULL_SECRET_EMAIL }}" \
             --set backend.database_url="${{ secrets.BACKEND_DATABASE_URL }}" \
             --set backend.los_database_url="${{ secrets.BACKEND_LOS_DATABASE_URL }}" \
             --set backend.database_user="${{ secrets.BACKEND_DATABASE_USER }}" \

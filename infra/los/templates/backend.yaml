@@ -22,6 +22,10 @@ spec:
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
+      {{- if .Values.imageCredentials }}
+      imagePullSecrets:
+        - name: pull-secret
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}-backend
           image: "{{ .Values.los_backend.image.repository }}:{{ .Values.los_backend.image.tag }}"

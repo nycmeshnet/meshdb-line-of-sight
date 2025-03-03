@@ -2,7 +2,7 @@ los_namespace: "los"
 
 los:
   image:
-    repository: willnilges/meshdb-line-of-sight
+    repository: docker.io/willnilges/meshdb-line-of-sight
     tag: helm
     pullPolicy: Always
   port: 3000
@@ -29,7 +29,7 @@ los:
 
 los_backend:
   image:
-    repository: andrewdickinson/meshdb-los-tool
+    repository: docker.io/andrewdickinson/meshdb-los-tool
     tag: latest
     pullPolicy: Always
   port: 3000
@@ -54,7 +54,7 @@ los_backend:
 
 los_database:
   image:
-    repository: postgis/postgis
+    repository: docker.io/postgis/postgis
     tag: 16-master
     pullPolicy: Always
   port: 5432
@@ -71,6 +71,9 @@ los_database:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+
+imageCredentials:
+  registry: docker.io
 
 nameOverride: ""
 fullnameOverride: ""
